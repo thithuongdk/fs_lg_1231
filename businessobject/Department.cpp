@@ -10,27 +10,21 @@ Department::Department(string dName, int dNumber, long mgrSSN, string mgrStartDa
     MgrStartDate = mgrStartDate;    // Start date of manager 
 };
 
-string Department::GetDName(){
-    return DName;
+Department::Department(vector<string> vt){
+    FromVt(vt);
 };
-void Department::SetDName(string dName){
-    DName = dName; 
-};
-int Department::GetDNumber(){
-    return DNumber;
-};
-void Department::SetDNumber(int dNumber){
-    DNumber = dNumber; 
-};
-long Department::GetMgrSSN(){
-    return MgrSSN;
-};
-void Department::SetMgrSSN(long mgrSSN){
-    MgrSSN = mgrSSN; 
-};
-string Department::GetMgrStartDate(){
-    return MgrStartDate;
-};
-void Department::SetMgrStartDate(string mgrStartDate){
-    MgrStartDate = mgrStartDate; 
-};
+
+// ========Override========
+
+void Department::FromMapMember(){
+    DName = Member["DName"];
+    DNumber = stoi(Member["DNumber"]);
+    MgrSSN = stol(Member["MgrSSN"]);
+    MgrStartDate = Member["MgrStartDate"];
+}
+void Department::ToMapMember(){
+    Member["DName"] = DName;
+    Member["DNumber"] = to_string(DNumber);
+    Member["MgrSSN"] = to_string(MgrSSN);
+    Member["MgrStartDate"] = MgrStartDate;
+}

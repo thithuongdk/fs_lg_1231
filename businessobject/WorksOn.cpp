@@ -3,42 +3,25 @@
 
 WorksOn::WorksOn(){};
 
-WorksOn::WorksOn(int id, long eSSN, int pno, double hours)
+WorksOn::WorksOn(long eSSN, int pno, double hours)
 {
-    Id = id;
     ESSN = eSSN;
     PNO = pno;
     Hours = hours;
 };
-
-int WorksOn::GetId(){
-    return Id;
+WorksOn::WorksOn(vector<string> vt){
+    FromVt(vt);
 };
 
-void WorksOn::SetId(int id){
-    Id = id;
-};
+// ========Override========
 
-long WorksOn::GetESSN(){
-    return ESSN;
-};
-
-void WorksOn::SetESSN(long eSSN){
-    ESSN = eSSN;
-};
-
-int WorksOn::GetPNO(){
-    return PNO;
-};
-
-void WorksOn::SetPNO(int pNO){
-    PNO = pNO;
-};
-
-double WorksOn::GetHours(){
-    return Hours;
-};
-
-void WorksOn::SetHours(double hours){
-    Hours = hours;
-};
+void WorksOn::FromMapMember(){
+    ESSN = stol(Member["ESSN"]);
+    PNO = stoi(Member["PNO"]);
+    Hours = stod(Member["Hours"]);
+}
+void WorksOn::ToMapMember(){
+    Member["ESSN"] = to_string(ESSN);
+    Member["PNO"] = to_string(PNO);
+    Member["Hours"] = to_string(Hours);
+}

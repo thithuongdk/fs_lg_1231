@@ -1,7 +1,9 @@
 #include "TableData.h"
 
 // ========Contructor========
-TableData::TableData(){};
+TableData::TableData(TableUnit* ptU){
+    tableUnit = ptU;
+};
 TableData::TableData(string filePath, TableUnit* ptU){
     Size = 0;
     Data.resize(0);
@@ -10,47 +12,27 @@ TableData::TableData(string filePath, TableUnit* ptU){
     char buff[maxSize];
     while(inFile.getline(buff, maxSize))
     {
-        json j = json::parse(buff);
-        TableUnit* unit = ptU->ClonePtr();
-        unit->ImportJson(j);
+        TableUnit* unit = GetTableUnit();
+        unit->FromStringDecode(buff);
         Data.push_back(unit);
     }
     inFile.close();
 };
 
 // ========Ex========
-int TableData::DataIn(TableUnit *ptU){
-    TableUnit* unit = ptU->ClonePtr();
-    unit->DataIn();
-    int size = Push(unit);
-    return size;
-};
-int TableData::DataOut(){
-    for(TableUnit *unit:Data){
-        unit->DataOut();
-    }
-    return Size;
-};
 int TableData::GetSize(){
     return Size;
 };
-string TableData::ExportString(){
+string TableData::ToString(){
     string sOut("");
     for(TableUnit* unit:Data){
-        sOut = sOut + unit->ExportString() + "\n";
+        sOut = sOut + unit->ToString() + "\n";
     }
     return sOut;
 };
-int TableData::ExportJson(string filePath){
-    ofstream outFile(filePath, ios::out);
-    if (!outFile) return 0;
-    for(TableUnit* unit:Data){
-        outFile << unit->ExportJson() << endl;
-    }
-    outFile.close();
-    return Size;
-};
-
+TableUnit* TableData::GetTableUnit(){
+    return tableUnit;
+}
 int TableData::Push(TableUnit *unit){
     Data.push_back(unit);
     Size++;
@@ -64,7 +46,7 @@ int TableData::Change(int index, TableUnit *unit){
     };    
     return index;
 };
-int TableData::Delele(int index){    
+int TableData::Delele(int index){
     if(index < Data.size()){
         Data.erase(Data.begin() + index);
     } else {
@@ -72,10 +54,60 @@ int TableData::Delele(int index){
     };
     return index;
 };
+
 TableUnit* TableData::GetPtr(int index){
     TableUnit *ptr = nullptr;    
     if(index < Data.size()){
         ptr = Data[index];
     };
     return ptr;
+};
+
+TableUnit* TableData::Find(string key, string value){
+    for(TableUnit* unit:Data){
+        if(unit->CheckValue(key, value)){
+            return unit;
+            break;
+        }
+    }
+    return nullptr;
+};
+
+vector<TableUnit*> TableData::FindList(string key, string value){
+    vector<TableUnit*> vts;
+    for(TableUnit* unit:Data){
+        if(unit->CheckValue(key, value)){
+            vts.push_back(unit);
+        }
+    }
+    return vts;
+};
+
+vector<TableUnit*> TableData::GetData(){
+    return Data;
+};
+void TableData::Backup(string path){
+    ofstream outFile(path, ios::trunc);
+    if (!outFile){ return;}
+    for(TableUnit* unit:Data){
+        outFile << unit->ToStringEncode() << endl;
+    }
+    outFile.close();
+};
+void TableData::Restore(string path){
+    Size = 0;
+    for(TableUnit* unit:Data){
+        delete unit;
+    }
+    Data.resize(0); 
+    ifstream inFile(path);
+    const int maxSize = 255;
+    char buff[maxSize];
+    while(inFile.getline(buff, maxSize))
+    {
+        TableUnit* unit = GetTableUnit();
+        unit->FromStringDecode(buff);
+        Data.push_back(unit);
+    }
+    inFile.close();
 };

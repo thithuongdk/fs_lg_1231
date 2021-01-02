@@ -1,24 +1,22 @@
 #ifndef Project_businessobject_WorksOn_h_
 #define Project_businessobject_WorksOn_h_
 
+#include <iostream>
+#include <string>
+#include <vector>
+#include "TableUnit.h"
 using namespace std;
 
-class WorksOn{
-    int Id;
+class WorksOn : public TableUnit{
     long ESSN;
     int PNO;
     double Hours;
 public:
     WorksOn();
-    WorksOn(int id, long eSSN, int pno, double hours);    
-    int GetId();
-    void SetId(int id);
-    long GetESSN();
-    void SetESSN(long eSSN);
-    int GetPNO();
-    void SetPNO(int pNO);
-    double GetHours();
-    void SetHours(double hours);
+    WorksOn(long eSSN, int pno, double hours); 
+    WorksOn(vector<string> vt);
+    void FromMapMember() override;
+    void ToMapMember() override;
     
 };
 #endif

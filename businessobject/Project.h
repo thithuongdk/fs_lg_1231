@@ -3,9 +3,11 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include "TableUnit.h"
 using namespace std;
 
-class Project{
+class Project : public TableUnit{
     string PName;       // Name of Project
     int PNumber;        // number of Project
     string PLocation;   // Project location
@@ -13,14 +15,9 @@ class Project{
 public:
     Project();
     Project(string pName, int pNumber, string pLocation, int dNum);
-    string GetPName();
-    void SetPName(string pName);
-    int GetPNumber();
-    void SetPNumber(int pNumber);
-    string GetPLocation();
-    void SetPLocation(string pLocation);
-    int GetDNum();
-    void SetDNum(int dNum);
+    Project(vector<string> vt);
+    void FromMapMember() override;
+    void ToMapMember() override;
 };
 
 #endif // Project_businessobject_Project_h_

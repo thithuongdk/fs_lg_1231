@@ -4,15 +4,19 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
+#include "..\businessobject\TableUnit.h"
+#include "..\dataprocessing\TableData.h"
 using namespace std;
 
 class IO{
 protected:
-    vector<string> VtOut;
 public:
     IO();
-    vector<string> DIn();
-    void DOut(vector<string> VtIn);
+    void DataIn(TableUnit*);
+    void DataOut(TableUnit*);
+    void DataIn(TableData*);
+    void DataOut(TableData*);
 };
 
 #endif // Project_ui_IO_h_

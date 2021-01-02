@@ -3,61 +3,31 @@
 
 Dependent::Dependent(){};
 
-Dependent::Dependent(int id, long eSSN, string dependentName, char sex, string bDate, string relationship)
+Dependent::Dependent(long eSSN, string dependentName, string sex, string bDate, string relationship)
 {
-    Id = id;
     ESSN = eSSN;
     DependentName = dependentName;
     Sex = sex;
     BDate = bDate;
     Relationship = relationship;
 };
-
-int Dependent::GetId(){
-    return Id;
+Dependent::Dependent(vector<string> vt){
+    FromVt(vt);
 };
 
-void Dependent::SetId(int id){
-    Id = id;
-};
+// ========Override========
 
-long Dependent::GetESSN(){
-    return ESSN;
-};
-
-void Dependent::SetESSN(long eSSN){
-    ESSN = eSSN;
-};
-
-string Dependent::GetDependentName(){
-    return DependentName;
-};
-
-void Dependent::SetDependentName(string dependentName){
-    DependentName = dependentName;
-};
-
-char Dependent::GetSex(){
-    return Sex;
-};
-
-void Dependent::SetSex(char sex){
-    Sex = sex;
-};
-
-string Dependent::GetBDate(){
-    return BDate;
-};
-
-void Dependent::SetBDate(string bDate){
-    BDate = bDate;
-};
-
-string Dependent::GetRelationship(){
-    return Relationship;
-};
-
-void Dependent::SetRelationship(string relationship){
-    Relationship = relationship;
-};
-
+void Dependent::FromMapMember(){
+    ESSN = stol(Member["ESSN"]);
+    DependentName = Member["DependentName"];
+    Sex = Member["Sex"];
+    BDate = Member["BDate"];
+    Relationship = Member["Relationship"];
+}
+void Dependent::ToMapMember(){
+    Member["ESSN"] = to_string(ESSN);
+    Member["DependentName"] = DependentName;
+    Member["Sex"] = Sex;
+    Member["BDate"] = BDate;
+    Member["Relationship"] = Relationship;
+}

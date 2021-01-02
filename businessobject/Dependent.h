@@ -1,30 +1,23 @@
 #ifndef Project_businessobject_Dependent_h_
 #define Project_businessobject_Dependent_h_
 
+#include <iostream>
 #include <string>
+#include <vector>
+#include "TableUnit.h"
 using namespace std;
 
-class Dependent{
-    int Id;
+class Dependent : public TableUnit{
     long ESSN;
     string DependentName;
-    char Sex;
+    string Sex;
     string BDate;
     string Relationship;
 public:
     Dependent();
-    Dependent(int id, long eSSN, string dependentName, char sex, string bDate, string relationship);
-    int GetId();
-    void SetId(int id);
-    long GetESSN();
-    void SetESSN(long eSSN);
-    string GetDependentName();
-    void SetDependentName(string dependentName);
-    char GetSex();
-    void SetSex(char sex);
-    string GetBDate();
-    void SetBDate(string bDate);
-    string GetRelationship();
-    void SetRelationship(string relationship);
+    Dependent(long eSSN, string dependentName, string sex, string bDate, string relationship);
+    Dependent(vector<string> vt);
+    void FromMapMember() override;
+    void ToMapMember() override;
 };
 #endif
