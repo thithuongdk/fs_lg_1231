@@ -12,7 +12,7 @@ businessobject\WorksOn.cpp ^
 businessobject\Dependent.cpp ^
 businessobject\TableUnit.cpp ^
 dataprocessing\TableData.cpp ^
-dataprocessing\Company.cpp ^
+dataprocessing\Solution.cpp ^
 -o ^
 main.exe
 

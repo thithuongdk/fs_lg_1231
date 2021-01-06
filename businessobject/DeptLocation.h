@@ -8,14 +8,36 @@
 using namespace std;
 
 class DeptLocation : public TableUnit{
-    int DNumber;        // number of location
-    string DLocation;   // location name
+    int _dNumber;        // number of location
+    string _dLocation;   // location name
 public:
     DeptLocation();
     DeptLocation(int dNumber, string dLocation);
-    DeptLocation(vector<string> vt);
-    void FromMapMember() override;
-    void ToMapMember() override;
+
+    /** @brief Function update attribute from the array _member
+     *  
+     *@details  Function update attribute from the array _member
+    */
+    void fromMapMember() override;
+
+    /** @brief Function save attribute in array member
+     * 
+     *@details Function save attribute in array member
+     *
+    */
+    void toMapMember() override;
+
+    /** @brief Function initialize a new memory 
+     * 
+     *@details Function initialize a new memory 
+     *
+    */
+    TableUnit *clonePtr();
+    
+    int GetDNumber();
+    void SetDNumber(int dNumber);
+    string GetDLocation();
+    void SetDLocation(string dLocation);
 };
 
 #endif // Project_businessobject_DeptLocation_h_

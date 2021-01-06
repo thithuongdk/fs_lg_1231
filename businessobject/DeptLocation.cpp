@@ -2,24 +2,42 @@
 
 // ========Contructor========
 DeptLocation::DeptLocation(){
-    DNumber = 0;
-    DLocation = "";
-};
+    _dNumber = 0;
+    _dLocation = "";
+}
 DeptLocation::DeptLocation(const int dNumber, const string dLocation){
-    DNumber = dNumber;
-    DLocation = dLocation;
-};
-DeptLocation::DeptLocation(vector<string> vt){
-    FromVt(vt);
-};
+     _dNumber = dNumber;
+    _dLocation = dLocation;
+}
 
 // ========Override========
 
-void DeptLocation::FromMapMember(){
-    DNumber = stoi(Member["DNumber"]);
-    DLocation = Member["DLocation"];
+void DeptLocation::fromMapMember(){
+     _dNumber = stoi(_member["DNumber"]);
+    _dLocation = _member["DLocation"];
 }
-void DeptLocation::ToMapMember(){
-    Member["DNumber"] = to_string(DNumber);
-    Member["DLocation"] = DLocation;
+void DeptLocation::toMapMember(){
+    _member["DNumber"] = to_string( _dNumber);
+    _member["DLocation"] = _dLocation;
 }
+
+TableUnit *DeptLocation::clonePtr(){
+    TableUnit *pU = new DeptLocation();
+    return pU;
+}
+
+int DeptLocation::GetDNumber(){
+    return _dNumber;
+};
+
+void DeptLocation::SetDNumber(int dNumber){
+    _dNumber = dNumber;
+};
+
+string DeptLocation::GetDLocation(){
+    return _dLocation;
+};
+
+void DeptLocation::SetDLocation(string dLocation){
+    _dLocation = dLocation;
+};

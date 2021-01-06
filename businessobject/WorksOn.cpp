@@ -1,27 +1,53 @@
 #include "WorksOn.h"
 #include <string>
 
-WorksOn::WorksOn(){};
+WorksOn::WorksOn(){}
 
 WorksOn::WorksOn(long eSSN, int pno, double hours)
 {
-    ESSN = eSSN;
-    PNO = pno;
-    Hours = hours;
-};
-WorksOn::WorksOn(vector<string> vt){
-    FromVt(vt);
-};
+    _eSSN = eSSN;
+    _pno= pno;
+    _hours= hours;
+}
 
 // ========Override========
 
-void WorksOn::FromMapMember(){
-    ESSN = stol(Member["ESSN"]);
-    PNO = stoi(Member["PNO"]);
-    Hours = stod(Member["Hours"]);
+void WorksOn::fromMapMember(){
+    _eSSN = stol(_member["ESSN"]);
+    _pno = stoi(_member["PNO"]);
+    _hours = stod(_member["Hours"]);
 }
-void WorksOn::ToMapMember(){
-    Member["ESSN"] = to_string(ESSN);
-    Member["PNO"] = to_string(PNO);
-    Member["Hours"] = to_string(Hours);
+void WorksOn::toMapMember(){
+    _member["ESSN"] = to_string(_eSSN);
+    _member["PNO"] = to_string(_pno);
+    _member["Hours"] = to_string(_hours);
 }
+
+TableUnit *WorksOn::clonePtr(){
+    TableUnit *pU = new WorksOn();
+    return pU;
+}
+
+long WorksOn::GetESSN(){
+    return _eSSN;
+};
+
+void WorksOn::SetESSN(long eSSN){
+    _eSSN = eSSN;
+};
+
+int WorksOn::GetPNO(){
+    return _pno;
+};
+
+void WorksOn::SetPNO(int pNO){
+    _pno = pNO;
+};
+
+double WorksOn::GetHours(){
+    return _hours;
+};
+
+void WorksOn::SetHours(double hours){
+    _hours = hours;
+};

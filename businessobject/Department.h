@@ -9,15 +9,42 @@ using namespace std;
 
 class Department : public TableUnit{
 private:
-    string DName;
-    int DNumber;
-    long MgrSSN;
-    string MgrStartDate;
+    string _dName;
+    int _dNumber;
+    long _mgrSSN;
+    string _mgrStartDate;
 public :
     Department();
     Department(string dName, int dNumber, long mgrSSN, string mgrStartDate);
-    Department(vector<string> vt);
-    void FromMapMember() override;
-    void ToMapMember() override;
+
+    /** @brief Function update attribute from the array _member
+     *  
+     *@details  Function update attribute from the array _member
+    */
+    void fromMapMember() override;
+
+    /** @brief Function save attribute in array member
+     * 
+     *@details Function save attribute in array member
+     *
+    */
+    void toMapMember() override;
+    
+    /** @brief Function initialize a new memory 
+     * 
+     *@details Function initialize a new memory 
+     *
+    */
+    TableUnit *clonePtr();
+    
+    string GetDName();
+    void SetDName(string dName);
+    int GetDNumber();
+    void SetDNumber(int dNumber);
+    long GetMgrSSN();
+    void SetMgrSSN(long mgrSSN);
+    string GetMgrStartDate();
+    void SetMgrStartDate(string mgrStartDate);
+
 };
 #endif

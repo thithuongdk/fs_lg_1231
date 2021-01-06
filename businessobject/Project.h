@@ -8,16 +8,41 @@
 using namespace std;
 
 class Project : public TableUnit{
-    string PName;       // Name of Project
-    int PNumber;        // number of Project
-    string PLocation;   // Project location
-    int DNum;           // dept Location number
+    string _pName;       // Name of Project
+    int _pNumber;        // number of Project
+    string _pLocation;   // Project location
+    int _dNum;           // dept Location number
 public:
     Project();
     Project(string pName, int pNumber, string pLocation, int dNum);
-    Project(vector<string> vt);
-    void FromMapMember() override;
-    void ToMapMember() override;
+    
+    /** @brief Function update attribute from the array _member
+     *  
+     *@details  Function update attribute from the array _member
+    */
+    void fromMapMember() override;
+
+    /** @brief Function save attribute in array member
+     * 
+     *@details Function save attribute in array member
+     *
+    */
+    void toMapMember() override;
+    
+    /** @brief Function initialize a new memory 
+     * 
+     *@details Function initialize a new memory 
+     *
+    */
+    TableUnit *clonePtr();
+    string GetPName();
+    void SetPName(string pName);
+    int GetPNumber();
+    void SetPNumber(int pNumber);
+    string GetPLocation();
+    void SetPLocation(string pLocation);
+    int GetDNum();
+    void SetDNum(int dNum);
 };
 
 #endif // Project_businessobject_Project_h_

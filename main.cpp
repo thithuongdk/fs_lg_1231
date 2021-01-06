@@ -1,5 +1,5 @@
 #include <iostream>
-#include "dataprocessing\Company.h"
+#include "dataprocessing\Solution.h"
 #include "ui\Menu.h"
 using namespace std;
 
@@ -8,13 +8,13 @@ int main(){
     int i;
     cout << "-- QLNS Group Linh Thuong Tin --" << endl;
     cout << "----------------Init infor---------------------"<< endl;
-    Company company;
-    company.InitData();    
+    Solution solution;
+    solution.initData();    
     cout << "----------------Show all infor---------------------"<< endl;
-    //company.ShowAllData();        
+    solution.showAllData();        
     cout << "----------------Question---------------------"<< endl;
-    Menu menu(&company);
-    menu.Home();
+    Menu menu(&solution);
+    menu.home();
     cout << "----------------end---------------------"<< endl;
     return 0;
 }
